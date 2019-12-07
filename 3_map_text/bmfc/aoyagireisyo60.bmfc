@@ -9,7 +9,7 @@ fontSize=50
 aa=2
 scaleH=100
 useSmoothing=1
-isBold=0
+isBold=1
 isItalic=0
 useUnicode=1
 disableBoxChars=1
@@ -47,7 +47,7 @@ invG=0
 invB=0
 
 # outline
-outlineThickness=2
+outlineThickness=0
 
 # selected chars
 

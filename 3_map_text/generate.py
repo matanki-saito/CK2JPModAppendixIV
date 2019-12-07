@@ -13,14 +13,16 @@ def nega_posi(name, ext):
     im = Image.open('./out/' + name + ext).convert('RGBA')
     r, g, b, a = im.split()
     r, g, b = map(invert, (r, g, b))
-    im_invert = Image.merge(im.mode, (r, g, b, a))
 
-    # 白がきついので明るさを落とす
-    enhancer = ImageEnhance.Brightness(im_invert)
-    im_enh = enhancer.enhance(0.7)
+    # 透明度を上げる（アルファを下げる）
+    enhancer = ImageEnhance.Brightness(a)
+    a_enh = enhancer.enhance(0.75)
+
+    # RGBとAを結合
+    im_enh = Image.merge(im.mode, (r, g, b, a_enh))
 
     # ぼかし
-    im_g = im_enh.filter(ImageFilter.GaussianBlur(radius=0.4))
+    im_g = im_enh.filter(ImageFilter.GaussianBlur(radius=0.1))
 
     # 上書き
     im_g.save('./out/' + name + ".tga", quality=100)
